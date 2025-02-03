@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .user-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .user-item {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-item strong {
+            color: #333;
+        }
+
+        .user-item p {
+            margin: 5px 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #f44336; /* Kırmızı renk */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e53935;
+        }
+
+        .back-button:active {
+            background-color: #d32f2f;
+        }
+
+        .delete-button {
+            display: inline-block;
+            background-color: #d32f2f;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c62828;
+        }
+
+        .delete-button:active {
+            background-color: #b71c1c;
+        }
+
+        .repo-button {
+            display: inline-block;
+            background-color: #388e3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .repo-button:hover {
+            background-color: #2c6d31;
+        }
+
+        .repo-button:active {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Users List</h2>
+
+    <ul class="user-list">
+        <li th:each="user : ${users}" class="user-item">
+            <strong th:text="${user.username}">Username</strong><br>
+            <p th:text="'Email: ' + ${user.email}">Email</p>
+
+            <a th:href="@{/users/delete/{id}(id=${user.id})}" class="delete-button">Delete</a>
+
+            <a th:href="@{/commits/getByUser/{userId}(userId=${user.id})}" class="repo-button">Go to User All Commit</a>
+        </li>
+    </ul>
+
+    <a href="/fetch/fetchPage" class="back-button">Back to Fetch Page</a>
+</div>
+</body>
+</html>

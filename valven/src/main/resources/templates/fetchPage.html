@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch GitHub & GitLab Commits</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      padding-bottom: 90px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: block;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .form-container {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .users-button {
+      background-color: #007BFF;
+      margin-top: 20px;
+    }
+
+    .users-button:hover {
+      background-color: #0056b3;
+    }
+
+    .gitlab-button {
+      background-color: #FF4500;
+      margin-top: 20px;
+    }
+
+    .gitlab-button:hover {
+      background-color: #CC3700;
+    }
+
+    .error-message {
+      display: none;
+      background-color: #ffcccc;
+      color: #cc0000;
+      padding: 10px;
+      border-radius: 4px;
+      width: 80%;
+      text-align: center;
+      font-weight: bold;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>GitHub & GitLab Commits Fetcher</h2>
+
+  <form action="/fetch/getGithubCommits" method="post">
+    <div class="form-container">
+      <label for="username">GitHub Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="repoName">Repository Name:</label>
+      <input type="text" id="repoName" name="repoName" required>
+
+      <label for="fromDateTime">From Date:</label>
+      <input type="datetime-local" id="fromDateTime" name="fromDateTime">
+
+      <div id="errorBox" class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+      <button type="submit">Fetch GitHub Commits</button>
+    </div>
+  </form>
+
+  <form action="/fetch/getGitLabCommits" method="post">
+    <div class="form-container">
+      <label for="projectId">GitLab Project ID:</label>
+      <input type="text" id="projectId" name="projectId" required>
+
+      <button type="submit" class="gitlab-button">Fetch GitLab Commits</button>
+    </div>
+  </form>
+
+
+  <form action="/users/getAll" method="get">
+    <button type="submit" class="users-button">Users</button>
+  </form>
+
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var errorBox = document.getElementById("errorBox");
+    if (errorBox && errorBox.innerText.trim() !== "") {
+      errorBox.style.display = "block";
+      setTimeout(() => errorBox.style.display = "none", 4000);
+    }
+  });
+</script>
+
+</body>
+</html>

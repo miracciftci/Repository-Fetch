@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commit Detail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .commit-detail {
+            display: flex;
+            align-items: center; /* Yazıları dikey olarak hizalar */
+            padding: 15px;
+            border-bottom: 1px solid #ddd; /* Çizgi ekleme */
+        }
+
+        .commit-detail:nth-child(even) {
+            background-color: #f9f9f9; /* Alternatif renk */
+        }
+
+        .commit-detail p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin: 0;
+            flex: 1;
+            display: flex;
+        }
+
+        .commit-detail strong {
+            min-width: 180px; /* Sağ tarafa eşit boşluk bırakmak için */
+            text-align: left;
+            color: #333;
+        }
+
+        .commit-detail p span {
+            flex: 1;
+            text-align: left; /* Değerleri sola yaslı yapar */
+            padding-left: 20px; /* Sağ ekrandan 20px mesafe bırakır */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Commit Details</h2>
+
+    <div class="commit-detail">
+        <p><strong>UserName:</strong> <span th:text="${commit.userDto.getUsername()}">UserName</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>User Email:</strong> <span th:text="${commit.userDto.getEmail()}">User Email</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>Platform Name:</strong> <span th:text="${commit.platformName}">Platform Name</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>Repo Name:</strong> <span th:text="${commit.repoName}">Repo Name</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>Hash:</strong> <span th:text="${commit.hash}">Hash</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>Message:</strong> <span th:text="${commit.message}">Message</span></p>
+    </div>
+
+    <div class="commit-detail">
+        <p><strong>Timestamp:</strong> <span th:text="${commit.localDateTime}">Timestamp</span></p>
+    </div>
+</div>
+</body>
+</html>

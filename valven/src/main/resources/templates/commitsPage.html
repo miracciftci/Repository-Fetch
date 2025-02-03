@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commit Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto; /* Taşan içeriğin kaydırılmasını sağla */
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .commit-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .commit-item {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word; /* Uzun kelimelerin taşmasını önle */
+            overflow-wrap: break-word;
+        }
+
+        .commit-item strong {
+            color: #333;
+        }
+
+        .commit-item p {
+            margin: 5px 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8B0000; /* Koyu kırmızı */
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #600000; /* Daha koyu kırmızı */
+        }
+
+        .view-button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-top: 10px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .view-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="${user.username} + ' Commits List'">User Commit Details</h2>
+
+    <ul class="commit-list">
+        <li th:each="commit : ${commits}" class="commit-item">
+            <strong th:text="'RepoName: ' + ${commit.repoName}">RepoName</strong><br>
+            <p th:text="'Hash: ' + ${commit.hash}">Hash</p>
+            <p th:text="'Timestamp: ' + ${commit.localDateTime}">Timestamp</p>
+
+            <a th:href="@{/commits/getById/{id}(id=${commit.id})}" class="view-button">View Commit</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
